@@ -39,8 +39,9 @@ public:
 				std::shared_ptr<std::mutex> mutex,
 				std::shared_ptr<std::condition_variable> cv
 				)
+				:m_mpsc(std::unique_ptr<Mpsc>(new Mpsc(queue, mutex, cv, callItAsAFunction<VoidFunc>)))
+
 	{
-		m_mpsc = std::unique_ptr<Mpsc>(new Mpsc(queue, mutex, cv, callItAsAFunction<VoidFunc>));
 	}
 
 	long addTimer(VoidFunc func, UINT delay)

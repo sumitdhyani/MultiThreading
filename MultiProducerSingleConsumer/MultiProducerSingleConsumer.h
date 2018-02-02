@@ -25,11 +25,10 @@ public:
 								 )
 								 :m_queue(queue),
 								  m_mutex_queue(mutex),
-								  m_cv(cv)
+								  m_cv(cv),
+								  m_consumerWaitingFlag(std::shared_ptr<bool>(new bool(true)))
 
 	{
-		 m_consumerWaitingFlag = std::shared_ptr<bool>(new bool(true));
-
 		 m_consumer = std::shared_ptr<Consumer>(new Consumer(queue,
 															 std::shared_ptr<Lock>(new Lock(*mutex, std::defer_lock)),
 															 cv,
